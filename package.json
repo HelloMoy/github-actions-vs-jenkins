@@ -1,0 +1,9 @@
+{
+  "name": "github-actions-vs-jenkins",
+  "version": "1.0.0",
+  "description": "Laboratorio para aprender CI/CD con GitHub Actions y Jenkins",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

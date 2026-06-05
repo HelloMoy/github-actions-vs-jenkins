@@ -1,0 +1,34 @@
+# Nombre del workflow (aparecerá en la pestaña "Actions" de GitHub).
+name: CI con GitHub Actions
+
+# 1) "on": ¿CUÁNDO se ejecuta esto?
+#    Aquí decimos: cuando hagas "push" (subas código) o abras un "pull request".
+on:
+  push:
+  pull_request:
+
+# 2) "jobs": ¿QUÉ trabajos se ejecutan? Un workflow tiene uno o varios "jobs".
+jobs:
+  # Nombre interno de nuestro trabajo. Lo llamamos "pruebas".
+  pruebas:
+    # ¿En qué tipo de máquina se ejecuta? GitHub nos presta una con Linux (Ubuntu).
+    runs-on: ubuntu-latest
+
+    # 3) "steps": los PASOS que se ejecutan, en orden, uno tras otro.
+    steps:
+      # Paso A: descargar tu código del repositorio a la máquina.
+      #   "uses" significa "usa una action ya hecha por otra persona".
+      #   "actions/checkout" es la action oficial para descargar tu código.
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      # Paso B: instalar Node.js en la máquina prestada.
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Paso C: ejecutar nuestras pruebas.
+      #   "run" significa "ejecuta este comando en la terminal".
+      - name: Ejecutar las pruebas
+        run: npm test
